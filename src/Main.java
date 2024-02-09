@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         Jogador jogador = new Jogador("Marcos", 18);
@@ -5,4 +8,6 @@ public class Main {
         System.out.println("Idade: " + jogador.getIdade());
 
     }
+
+    public static List<Jogador> listaMelhores = new ArrayList<>();
 }
