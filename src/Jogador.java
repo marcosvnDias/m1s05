@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.Scanner;
+
 public class Jogador {
 
     private String nome;
@@ -44,5 +47,24 @@ public class Jogador {
 
     public void adicionarTentativa(){
         numeroTentativa++;
+    }
+
+    public static Jogador adicionarJogador(Scanner scanner){
+        System.out.print("Nome do jogador");
+        String nome = scanner.nextLine();
+
+        boolean existe = Main.verificarSeExiste(nome);
+        while(existe){
+            System.out.println("Nome já existe, tente outro nome.");
+            System.out.print("Nome do jogador: ");
+            String novoNome = scanner.nextLine();
+
+            existe = Main.verificarSeExiste(novoNome);
+        }
+
+        System.out.print("Idade do jogador");
+        int idade = scanner.nextInt();
+
+        return new Jogador(nome, idade);
     }
 }
