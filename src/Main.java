@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
  import java.util.Scanner;
 
@@ -11,18 +12,27 @@ public class Main {
         while(!finalizar){
             System.out.println("\nDigite a opção que você quer executar");
             System.out.println("1 - Adicionar novo jogador");
-            System.out.println("2 - Mostrar ranking dos melhores jogadores");
+            System.out.println("2 - Mostrar ranking dos jogadores");
+            System.out.println("3 - Jogar");
             System.out.println("0 - Sair");
 
             int opcaoEscolhida = scanner.nextInt();
             switch(opcaoEscolhida){
                 case 1:
-                    System.out.println("1 - Adicionar novo jogador");
+                    System.out.println("\n1 - Adicionar novo jogador");
                     Jogador jogador = Jogador.adicionarJogador(scanner);
                     listaMelhores.add(jogador);
                     break;
                 case 2:
-                    listarJogadores();
+                    System.out.println("\n2 - Mostrar ranking dos jogadores");
+                    listarJogadores(0);
+                    break;
+                case 3:
+                    System.out.println("\n3 - Jogar");
+                    System.out.println("O jogo é pedra, papel, tesoura\n");
+
+                    Jogo jogo = new Jogo();
+                    jogo.jogar(scanner, jogo);
                     break;
                 case 0:
                     finalizar = true;
@@ -36,13 +46,19 @@ public class Main {
 
     public static List<Jogador> listaMelhores = new ArrayList<>();
 
-    public static void listarJogadores(){
-        for(int i = 0; i < listaMelhores.size(); i++){
-            Jogador item = listaMelhores.get(i);
-            System.out.println(item.getNome() + " - " + (i + 1));
+    public static void listarJogadores(int modo){
+        if(modo == 0 || modo == 1){
+            for(int i = 0; i < listaMelhores.size(); i++){
+                Jogador item = listaMelhores.get(i);
+                System.out.println(item.getNome() + " - " + (i + 1));
 
-            if(listaMelhores.size() >= 10 && i == 10){
-                break;
+                if(listaMelhores.size() >= 10 && i == 10 && modo == 1){
+                    break;
+                }
+            }
+        } else if (modo == 3) {
+            for(Jogador jogador : listaMelhores){
+                System.out.println("[" + jogador.getIdJogador() + "] " + jogador.getNome());
             }
         }
     }
@@ -57,5 +73,13 @@ public class Main {
         }
 
         return existe;
+    }
+
+    public static void ajustarRanking(){
+        List<Jogador> rankingAntigo = listaMelhores;
+        rankingAntigo.sort(Comparator.comparing(Jogador::getPontuacao).reversed());
+
+        listaMelhores = rankingAntigo;
+        Jogo.melhorJogador = listaMelhores.get(0);
     }
 }

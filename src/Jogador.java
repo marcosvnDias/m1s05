@@ -1,8 +1,9 @@
-import java.util.List;
 import java.util.Scanner;
 
 public class Jogador {
 
+    private static int idGeral = 0;
+    private int idJogador;
     private String nome;
     private int idade;
     private int pontuacao = 0;
@@ -11,6 +12,13 @@ public class Jogador {
     public Jogador(String nome, int idade){
         this.nome = nome;
         this.idade = idade;
+
+        idGeral += 1;
+        setIdJogador(idGeral);
+    }
+
+    public int getIdJogador() {
+        return idJogador;
     }
 
     public String getNome(){
@@ -37,12 +45,17 @@ public class Jogador {
         this.idade = idade;
     }
 
+    public void setIdJogador(int idJogador) {
+        this.idJogador = idJogador;
+    }
     public void adicionarPontos(){
         pontuacao++;
     }
 
-    public void aperderPontos(){
-        pontuacao--;
+    public void perderPontos(){
+        if(getPontuacao() != 0){
+            pontuacao--;
+        }
     }
 
     public void adicionarTentativa(){
@@ -50,7 +63,8 @@ public class Jogador {
     }
 
     public static Jogador adicionarJogador(Scanner scanner){
-        System.out.print("Nome do jogador");
+        scanner.nextLine();
+        System.out.print("Nome do jogador: ");
         String nome = scanner.nextLine();
 
         boolean existe = Main.verificarSeExiste(nome);
@@ -62,9 +76,10 @@ public class Jogador {
             existe = Main.verificarSeExiste(novoNome);
         }
 
-        System.out.print("Idade do jogador");
+        System.out.print("Idade do jogador: ");
         int idade = scanner.nextInt();
 
         return new Jogador(nome, idade);
     }
+
 }
