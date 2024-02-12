@@ -12,12 +12,29 @@ public class Main {
         while(!finalizar){
             System.out.println("\nDigite a opção que você quer executar");
             System.out.println("1 - Adicionar novo jogador");
-            System.out.println("2 - Mostrar ranking dos jogadores");
-            System.out.println("3 - Jogar pedra, papel, tesoura");
-            System.out.println("4 - Jogar adivinhe o número");
+
+            String opcao2 = Main.listaMelhores.isEmpty() ?
+                    "2 - Bloqueado" : "2 - Mostrar ranking dos jogadores";
+            System.out.println(opcao2);
+
+            String opcao3 = Main.listaMelhores.isEmpty() ?
+                    "3 - Bloqueado" : "3 - Jogar pedra, papel, tesoura";
+            System.out.println(opcao3);
+
+            String opcao4 = Main.listaMelhores.isEmpty() ?
+                    "4 - Bloqueado" : "4 - Jogar adivinhe o número";
+            System.out.println(opcao4);
             System.out.println("0 - Sair");
 
             int opcaoEscolhida = scanner.nextInt();
+            if(opcao2.equals("2 - Bloqueado") && opcaoEscolhida == 2){
+                opcaoEscolhida = -1;
+            } else if (opcao3.equals("3 - Bloqueado") && opcaoEscolhida == 3) {
+                opcaoEscolhida = -1;
+            } else if (opcao4.equals("4 - Bloqueado") && opcaoEscolhida == 4) {
+                opcaoEscolhida = -1;
+            }
+
             switch(opcaoEscolhida){
                 case 1:
                     System.out.println("\n1 - Adicionar novo jogador");
@@ -30,7 +47,6 @@ public class Main {
                     break;
                 case 3:
                     System.out.println("\n3 - Jogar pedra, papel, tesoura");
-
                     Jogo jogo1 = new Jogo();
                     jogo1.jogar(scanner, jogo1);
                     break;
@@ -57,12 +73,12 @@ public class Main {
     public static void listarJogadores(int modo){
         if(modo == 0 || modo == 1){
             for(int i = 0; i < listaMelhores.size(); i++){
-                Jogador item = listaMelhores.get(i);
-                System.out.println(item.getNome() + " - " + (i + 1));
-
-                if(listaMelhores.size() >= 10 && i == 10 && modo == 1){
+                if(listaMelhores.size() >= 10 && i >= 10 && modo == 1){
                     break;
                 }
+
+                Jogador item = listaMelhores.get(i);
+                System.out.println(item.getNome() + " - " + (i + 1));
             }
         } else if (modo == 3) {
             for(Jogador jogador : listaMelhores){

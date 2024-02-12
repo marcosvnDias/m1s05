@@ -65,7 +65,7 @@ public class Jogador {
 
         boolean existe = Main.verificarSeExiste(nome);
         while(existe){
-            System.out.println("Nome já existe, tente outro nome.");
+            System.out.println("\nNome já existe, tente outro nome.");
             System.out.print("Nome do jogador: ");
             String novoNome = scanner.nextLine();
 

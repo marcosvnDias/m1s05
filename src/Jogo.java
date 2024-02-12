@@ -92,14 +92,8 @@ public class Jogo {
                 jogador.adicionarTentativa();
             }
 
-            System.out.println("\nRanking:");
-            Main.ajustarRanking();
-            Main.listarJogadores(0);
-
-            System.out.println("\nCaso não deseje jogar novamente digite sim");
-            String resposta = scanner.next();
-
-            if(resposta.equals("sim")){
+            String sairJogo = menu(scanner);
+            if(sairJogo.equals("sim")){
                 finalizar = true;
             }
         }
@@ -118,6 +112,50 @@ public class Jogo {
         }
 
         return jogadorEscolhido;
+    }
+
+    public String menu(Scanner scanner){
+        boolean finalizar = false;
+        String sairJogo = "";
+
+        while(!finalizar){
+            System.out.println("\nDigite a opção que você quer executar");
+            System.out.println("1 - Ver ranking completo");
+            System.out.println("2 - Ver top 10");
+            System.out.println("3 - Jogar novamente");
+            System.out.println("4 - Encerrar o Jogo");
+
+            int opcaoEscolhida = scanner.nextInt();
+            switch(opcaoEscolhida){
+                case 1:
+                    System.out.println("\n1 - Ver ranking completo");
+                    System.out.println("Ranking:");
+
+                    Main.ajustarRanking();
+                    Main.listarJogadores(0);
+                    break;
+                case 2:
+                    System.out.println("\n2 - Ver top 10");
+                    System.out.println("\nRanking:");
+
+                    Main.ajustarRanking();
+                    Main.listarJogadores(1);
+                    break;
+                case 3:
+                    System.out.println("\n3 - Jogar novamente");
+                    sairJogo = "não";
+                    finalizar = true;
+                    break;
+                case 4:
+                    sairJogo = "sim";
+                    finalizar = true;
+                    break;
+                default:
+                    System.out.println("Opção inválida");
+            }
+        }
+
+        return sairJogo;
     }
 
 }
