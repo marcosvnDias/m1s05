@@ -13,7 +13,8 @@ public class Main {
             System.out.println("\nDigite a opção que você quer executar");
             System.out.println("1 - Adicionar novo jogador");
             System.out.println("2 - Mostrar ranking dos jogadores");
-            System.out.println("3 - Jogar");
+            System.out.println("3 - Jogar pedra, papel, tesoura");
+            System.out.println("4 - Jogar adivinhe o número");
             System.out.println("0 - Sair");
 
             int opcaoEscolhida = scanner.nextInt();
@@ -28,11 +29,18 @@ public class Main {
                     listarJogadores(0);
                     break;
                 case 3:
-                    System.out.println("\n3 - Jogar");
-                    System.out.println("O jogo é pedra, papel, tesoura\n");
+                    System.out.println("\n3 - Jogar pedra, papel, tesoura");
 
-                    Jogo jogo = new Jogo();
-                    jogo.jogar(scanner, jogo);
+                    Jogo jogo1 = new Jogo();
+                    jogo1.jogar(scanner, jogo1);
+                    break;
+                case 4:
+                    System.out.println("\n4 - Jogar adivinhe o número");
+                    System.out.println("Você quer adivinhar um número de 0 até quanto?");
+
+                    int numMax = scanner.nextInt();
+                    Jogo jogo2 = new Jogo();
+                    jogo2.jogar(scanner, numMax);
                     break;
                 case 0:
                     finalizar = true;

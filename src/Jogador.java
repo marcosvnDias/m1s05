@@ -10,8 +10,8 @@ public class Jogador {
     private int numeroTentativa = 0;
 
     public Jogador(String nome, int idade){
-        this.nome = nome;
-        this.idade = idade;
+        setNome(nome);
+        setIdade(idade);
 
         idGeral += 1;
         setIdJogador(idGeral);
@@ -23,10 +23,6 @@ public class Jogador {
 
     public String getNome(){
         return nome;
-    }
-
-    public int getIdade(){
-        return idade;
     }
 
     public int getPontuacao(){
